@@ -1,7 +1,7 @@
 package com.example.airqualityservice.controller;
 
-import com.example.airqualityservice.domain.dto.AirQualityReqDto;
-import com.example.airqualityservice.domain.dto.AirQualityResDto;
+import com.example.airqualityservice.controller.dto.AirQualityReqDto;
+import com.example.airqualityservice.controller.dto.AirQualityResDto;
 import com.example.airqualityservice.service.AirQualityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

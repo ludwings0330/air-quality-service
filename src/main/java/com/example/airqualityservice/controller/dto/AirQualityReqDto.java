@@ -1,4 +1,4 @@
-package com.example.airqualityservice.domain.dto;
+package com.example.airqualityservice.controller.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,11 +1,10 @@
 package com.example.airqualityservice.service;
 
-import com.example.airqualityservice.domain.dto.AirQualityReqDto;
-import com.example.airqualityservice.domain.dto.AirQualityResDto;
+import com.example.airqualityservice.controller.dto.AirQualityReqDto;
+import com.example.airqualityservice.controller.dto.AirQualityResDto;
 import com.example.airqualityservice.api.busan.BusanAirQualityApiCaller;
 import com.example.airqualityservice.api.seoul.SeoulAirQualityApiCaller;
 import com.example.airqualityservice.api.seoul.SeoulAirQualityApiDto;
-import com.example.airqualityservice.domain.AirQualityGrade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -62,16 +61,16 @@ public class AirQualityService {
     }
 
     private void judgeAirQualityGrade(AirQualityResDto resDto) {
-        resDto.setPm10AverageGrade(judgePm10Grade(resDto.getPm10Average().intValue()).name());
+        resDto.setPm10AverageGrade(judgePm10Grade(resDto.getPm10Average().intValue()));
 
         for (AirQualityResDto.AirQualityInfo info :
              resDto.getElements()) {
-            info.setPm10Grade(judgePm10Grade(info.getPm10()).name());
-            info.setPm25Grade(judgePm25Grade(info.getPm25()).name());
-            info.setO3Grade(judgeO3Grade(info.getO3()).name());
-            info.setNo2Grade(judgeNo2Grade(info.getNo2()).name());
-            info.setCoGrade(judgeCoGrade(info.getCo()).name());
-            info.setSo2Grade(judgeSo2Grade(info.getSo2()).name());
+            info.setPm10Grade(judgePm10Grade(info.getPm10()));
+            info.setPm25Grade(judgePm25Grade(info.getPm25()));
+            info.setO3Grade(judgeO3Grade(info.getO3()));
+            info.setNo2Grade(judgeNo2Grade(info.getNo2()));
+            info.setCoGrade(judgeCoGrade(info.getCo()));
+            info.setSo2Grade(judgeSo2Grade(info.getSo2()));
         }
     }
 
@@ -213,7 +212,7 @@ public class AirQualityService {
         return AirQualityGrade.매우나쁨;
     }
 
-    public Double getPm10Average(SeoulAirQualityApiDto.GetAirQualityResponse airQuality) {
+    private Double getPm10Average(SeoulAirQualityApiDto.GetAirQualityResponse airQuality) {
         List<SeoulAirQualityApiDto.Row> rows = airQuality.getResult().getRows();
 
         int totalCount = airQuality.getResult().getTotalCount();
