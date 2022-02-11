@@ -1,18 +1,39 @@
 package com.example.airqualityservice.controller.dto;
 
 import com.example.airqualityservice.service.AirQualityGrade;
+import com.example.airqualityservice.utils.AirQualityGradeUtility;
+import lombok.Builder;
 import lombok.Data;
 
+import java.security.Guard;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
+@Builder
 public class AirQualityResDto {
     private String city;
     private Double pm10Average;
     private AirQualityGrade pm10AverageGrade;
     private String measurementTime;
     private List<AirQualityInfo> elements = new ArrayList<>();
+
+    public AirQualityResDto searchByDistrict(String district) {
+        if (district == null) {
+            return this;
+        }
+        AirQualityInfo searchedAirQualityInfo = searchByDistrictAirQualityInfo(district);
+        elements = Collections.singletonList(searchedAirQualityInfo);
+        return this;
+    }
+
+    private AirQualityInfo searchByDistrictAirQualityInfo(String district) {
+        return elements.stream()
+                .filter(districtAirQualityInfo -> districtAirQualityInfo.getDistrict().equals(district))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(district + "에 해당하는 자치구는 존재하지 않습니다."));
+    }
 
     @Data
     public static class AirQualityInfo {
@@ -29,5 +50,22 @@ public class AirQualityResDto {
         private AirQualityGrade coGrade;
         private Double so2;
         private AirQualityGrade so2Grade;
+
+        public AirQualityInfo(String district, Integer pm25, Integer pm10, Double o3, Double no2, Double co, Double so2) {
+            this.district = district;
+            this.pm25 = pm25;
+            this.pm10 = pm10;
+            this.o3 = o3;
+            this.no2 = no2;
+            this.co = co;
+            this.so2 = so2;
+
+            this.pm25Grade = AirQualityGradeUtility.judgeCoGrade(Double.valueOf(pm25));
+            this.pm10Grade = AirQualityGradeUtility.judgeCoGrade(Double.valueOf(pm10));
+            this.o3Grade = AirQualityGradeUtility.judgeCoGrade(o3);
+            this.no2Grade = AirQualityGradeUtility.judgeCoGrade(no2);
+            this.coGrade = AirQualityGradeUtility.judgeCoGrade(co);
+            this.so2Grade = AirQualityGradeUtility.judgeCoGrade(so2);
+        }
     }
 }
