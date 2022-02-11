@@ -60,12 +60,12 @@ public class AirQualityResDto {
             this.co = co;
             this.so2 = so2;
 
-            this.pm25Grade = AirQualityGradeUtility.judgeCoGrade(Double.valueOf(pm25));
-            this.pm10Grade = AirQualityGradeUtility.judgeCoGrade(Double.valueOf(pm10));
-            this.o3Grade = AirQualityGradeUtility.judgeCoGrade(o3);
-            this.no2Grade = AirQualityGradeUtility.judgeCoGrade(no2);
+            this.pm25Grade = AirQualityGradeUtility.judgePm25Grade(Double.valueOf(pm25));
+            this.pm10Grade = AirQualityGradeUtility.judgePm10Grade(Double.valueOf(pm10));
+            this.o3Grade = AirQualityGradeUtility.judgeO3Grade(o3);
+            this.no2Grade = AirQualityGradeUtility.judgeNo2Grade(no2);
             this.coGrade = AirQualityGradeUtility.judgeCoGrade(co);
-            this.so2Grade = AirQualityGradeUtility.judgeCoGrade(so2);
+            this.so2Grade = AirQualityGradeUtility.judgeSo2Grade(so2);
         }
     }
 }
