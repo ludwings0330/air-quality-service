@@ -17,15 +17,11 @@ public class AirQualityResFactory {
     public AirQualityResDto getAirQuality(City city) {
 
         if (city == City.서울시) {
-            AirQualityResDto airQuality = seoulAirQualityApiCaller.getAirQuality();
-
-            return airQuality;
+            return seoulAirQualityApiCaller.getAirQuality();
         }
 
         if (city == City.부산시) {
-            AirQualityResDto airQuality = busanAirQualityApiCaller.getAirQuality();
-
-            return airQuality;
+            return busanAirQualityApiCaller.getAirQuality();
         }
 
         throw new RuntimeException(city + "시/도 대기질 정보는 준비중입니다.");
