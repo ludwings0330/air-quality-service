@@ -1,4 +1,4 @@
-package com.example.airqualityservice.domain;
+package com.example.airqualityservice.service;
 
 public enum AirQualityGrade {
     좋음,
