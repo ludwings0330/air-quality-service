@@ -62,7 +62,7 @@ public class SeoulAirQualityApiCaller {
 
 
         return AirQualityResDto.builder()
-                .city(City.서울시.getDescription())
+                .city(City.서울시)
                 .pm10Average(pm10Average)
                 .pm10AverageGrade(pm10AverageGrade)
                 .elements(elements)

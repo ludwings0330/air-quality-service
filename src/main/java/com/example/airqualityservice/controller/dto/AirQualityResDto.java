@@ -1,6 +1,7 @@
 package com.example.airqualityservice.controller.dto;
 
 import com.example.airqualityservice.service.AirQualityGrade;
+import com.example.airqualityservice.service.City;
 import com.example.airqualityservice.utils.AirQualityGradeUtility;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.List;
 @Data
 @Builder
 public class AirQualityResDto {
-    private String city;
+    private City city;
     private Double pm10Average;
     private AirQualityGrade pm10AverageGrade;
     private List<AirQualityInfo> elements = new ArrayList<>();

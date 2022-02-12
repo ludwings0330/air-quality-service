@@ -20,16 +20,30 @@ public class AirQualityService {
     private final SeoulAirQualityApiCaller seoulAirQualityApiCaller;
 
     public AirQualityResDto getAirQualityInfo(AirQualityReqDto reqDto) {
-        if (reqDto.getCity() == City.서울시) {
+        City reqCity = reqDto.getCity();
+        String reqDistrict = reqDto.getDistrict();
+
+        if (reqCity == City.서울시) {
             AirQualityResDto airQuality = seoulAirQualityApiCaller.getAirQuality();
 
-            return airQuality.searchByDistrict(reqDto.getDistrict());
+            if (reqDistrict != null) {
+                return airQuality.searchByDistrict(reqDistrict);
+            }
+
+            return airQuality;
         }
 
-        if (reqDto.getCity() == City.부산시) {
-            BusanAirQualityApiDto.GetAirQualityResponse airQuality = busanAirQualityApiCaller.getAirQuality();
+        if (reqCity == City.부산시) {
+            AirQualityResDto airQuality = busanAirQualityApiCaller.getAirQuality();
 
+            if (reqDistrict != null) {
+                return airQuality.searchByDistrict(reqDistrict);
+            }
+
+            return airQuality;
         }
+
+
 
         throw new RuntimeException(reqDto.getCity() + "대기질 정보는 준비중 입니다.");
     }
