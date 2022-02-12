@@ -16,7 +16,6 @@ public class AirQualityResDto {
     private String city;
     private Double pm10Average;
     private AirQualityGrade pm10AverageGrade;
-    private String measurementTime;
     private List<AirQualityInfo> elements = new ArrayList<>();
 
     public AirQualityResDto searchByDistrict(String district) {

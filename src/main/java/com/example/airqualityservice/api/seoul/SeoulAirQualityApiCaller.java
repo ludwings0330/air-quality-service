@@ -57,23 +57,18 @@ public class SeoulAirQualityApiCaller {
     private AirQualityResDto convertToAirQualityResDto(SeoulAirQualityApiDto.GetAirQualityResponse response) {
         List<SeoulAirQualityApiDto.Row> rows = response.getResult().getRows();
         Double pm10Average = getPm10Average(rows);
-        String measurementTime = getMeasurementTime(rows);
         AirQualityGrade pm10AverageGrade = AirQualityGradeUtility.judgePm10Grade(pm10Average);
         List<AirQualityResDto.AirQualityInfo> elements = convertToAirQualityInfoList(rows);
 
 
         return AirQualityResDto.builder()
                 .city(City.서울시.getDescription())
-                .measurementTime(measurementTime)
                 .pm10Average(pm10Average)
                 .pm10AverageGrade(pm10AverageGrade)
                 .elements(elements)
                 .build();
     }
 
-    private String getMeasurementTime(List<SeoulAirQualityApiDto.Row> rows) {
-        return rows.get(0).getMeasurementTime();
-    }
 
     private List<AirQualityResDto.AirQualityInfo> convertToAirQualityInfoList(List<SeoulAirQualityApiDto.Row> rows) {
         return rows.stream()

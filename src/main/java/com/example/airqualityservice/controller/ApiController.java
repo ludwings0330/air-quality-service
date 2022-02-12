@@ -15,7 +15,7 @@ public class ApiController {
     private final AirQualityService airQualityService;
 
     @GetMapping("/v1/api/air-qualities")
-    public AirQualityResDto getAirQuality(@RequestParam(value="city") City city, @RequestParam(required = false) String district) {
+    public AirQualityResDto getAirQuality(@RequestParam City city, @RequestParam(required = false) String district) {
         return airQualityService.getAirQualityInfo(new AirQualityReqDto(city, district));
     }
 }
