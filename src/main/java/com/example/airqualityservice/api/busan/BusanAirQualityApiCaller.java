@@ -86,14 +86,10 @@ public class BusanAirQualityApiCaller {
     }
 
     private Double getPm10Average(List<BusanAirQualityApiDto.Item> items) {
-        items.stream()
+        return items.stream()
                 .map(item -> item.getPm10())
                 .mapToDouble(Double::valueOf)
                 .average()
                 .orElse(Double.NaN);
-
-        return 0.0;
     }
-
-
 }
