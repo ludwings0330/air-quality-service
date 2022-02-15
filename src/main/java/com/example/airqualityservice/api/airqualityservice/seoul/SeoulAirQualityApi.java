@@ -1,4 +1,4 @@
-package com.example.airqualityservice.api.seoul;
+package com.example.airqualityservice.api.airqualityservice.seoul;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

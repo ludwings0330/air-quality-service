@@ -1,36 +1,30 @@
 package com.example.airqualityservice.service;
 
-import com.example.airqualityservice.api.busan.BusanAirQualityApiDto;
+import com.example.airqualityservice.api.airqualityservice.AirQualityApiFactory;
+import com.example.airqualityservice.api.airqualityservice.AirQualityApi;
 import com.example.airqualityservice.controller.dto.AirQualityReqDto;
 import com.example.airqualityservice.controller.dto.AirQualityResDto;
-import com.example.airqualityservice.api.busan.BusanAirQualityApiCaller;
-import com.example.airqualityservice.api.seoul.SeoulAirQualityApiCaller;
-import com.example.airqualityservice.api.seoul.SeoulAirQualityApiDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-import static com.example.airqualityservice.utils.AirQualityGradeUtility.*;
 
 @RequiredArgsConstructor
 @Service
 public class AirQualityService {
-    private final BusanAirQualityApiCaller busanAirQualityApiCaller;
-    private final SeoulAirQualityApiCaller seoulAirQualityApiCaller;
+    private final AirQualityApiFactory airQualityApiFactory;
 
     public AirQualityResDto getAirQualityInfo(AirQualityReqDto reqDto) {
-        if (reqDto.getCity() == City.서울시) {
-            AirQualityResDto airQuality = seoulAirQualityApiCaller.getAirQuality();
+        City reqCity = reqDto.getCity();
+        String reqDistrict = reqDto.getDistrict();
 
-            return airQuality.searchByDistrict(reqDto.getDistrict());
+        AirQualityApi airQualityApi = airQualityApiFactory.getAirQualityApi(reqCity);
+
+        AirQualityResDto airQuality = airQualityApi.getAirQuality();
+
+        if (reqDistrict != null) {
+            return airQuality.searchByDistrict(reqDistrict);
         }
 
-        if (reqDto.getCity() == City.부산시) {
-            BusanAirQualityApiDto.GetAirQualityResponse airQuality = busanAirQualityApiCaller.getAirQuality();
-
-        }
-
-        throw new RuntimeException(reqDto.getCity() + "대기질 정보는 준비중 입니다.");
+        return airQuality;
     }
 }
