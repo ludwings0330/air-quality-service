@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class AirQualityService {
     private final AirQualityApiFactory airQualityApiFactory;
-
     public AirQualityResDto getAirQualityInfo(AirQualityReqDto reqDto) {
         City reqCity = reqDto.getCity();
         String reqDistrict = reqDto.getDistrict();
 
         AirQualityApi airQualityApi = airQualityApiFactory.getAirQualityApi(reqCity);
 
-        AirQualityResDto airQuality = airQualityApi.getAirQuality();
+        AirQualityResDto airQuality = airQualityApi.getAirQuality(reqCity);
 
         if (reqDistrict != null) {
             return airQuality.searchByDistrict(reqDistrict);

@@ -40,7 +40,7 @@ public class BusanAirQualityApiCaller implements AirQualityApi {
     }
 
     @Override
-    public AirQualityResDto getAirQuality() {
+    public AirQualityResDto getAirQuality(City city) {
         try {
             var call = busanAirQualityApi.getAirQuality();
             var response = call.execute().body();

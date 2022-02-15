@@ -6,14 +6,14 @@ import com.example.airqualityservice.utils.AirQualityGradeUtility;
 import lombok.Builder;
 import lombok.Data;
 
-import java.security.Guard;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Data
 @Builder
-public class AirQualityResDto {
+public class AirQualityResDto implements Serializable {
     private City city;
     private Double pm10Average;
     private AirQualityGrade pm10AverageGrade;
@@ -36,7 +36,7 @@ public class AirQualityResDto {
     }
 
     @Data
-    public static class AirQualityInfo {
+    public static class AirQualityInfo implements Serializable{
         private String district;
         private Integer pm25;
         private AirQualityGrade pm25Grade;

@@ -41,7 +41,9 @@ public class SeoulAirQualityApiCaller implements AirQualityApi {
     }
 
     @Override
-    public AirQualityResDto getAirQuality() {
+    public AirQualityResDto getAirQuality(City city) {
+        log.info("캐싱되어있지않을때 해당 로그가 출력됩니다.");
+
         try {
             var call = seoulAirQualityApi.getAirQuality();
             var response = call.execute().body();
