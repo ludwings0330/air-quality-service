@@ -1,5 +1,6 @@
-package com.example.airqualityservice.api.seoul;
+package com.example.airqualityservice.api.airqualityservice.seoul;
 
+import com.example.airqualityservice.api.airqualityservice.AirQualityApi;
 import com.example.airqualityservice.controller.dto.AirQualityResDto;
 import com.example.airqualityservice.service.AirQualityGrade;
 import com.example.airqualityservice.service.City;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-public class SeoulAirQualityApiCaller {
+public class SeoulAirQualityApiCaller implements AirQualityApi {
 
     private final SeoulAirQualityApi seoulAirQualityApi;
 
@@ -34,6 +35,12 @@ public class SeoulAirQualityApiCaller {
         this.seoulAirQualityApi = retrofit.create(SeoulAirQualityApi.class);
     }
 
+    @Override
+    public City getCity() {
+        return City.서울시;
+    }
+
+    @Override
     public AirQualityResDto getAirQuality() {
         try {
             var call = seoulAirQualityApi.getAirQuality();

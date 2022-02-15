@@ -1,4 +1,4 @@
-package com.example.airqualityservice.api.seoul;
+package com.example.airqualityservice.api.airqualityservice.seoul;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
