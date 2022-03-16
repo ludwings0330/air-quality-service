@@ -41,6 +41,11 @@ public class SeoulAirQualityApiCaller implements AirQualityApi {
     }
 
     @Override
+    public AirQualityResDto getCachedAirQuality(City city) {
+        return getAirQuality();
+    }
+
+    @Override
     public AirQualityResDto getAirQuality() {
         try {
             var call = seoulAirQualityApi.getAirQuality();

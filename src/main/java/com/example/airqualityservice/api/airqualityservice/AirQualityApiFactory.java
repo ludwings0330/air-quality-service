@@ -25,7 +25,6 @@ public class AirQualityApiFactory {
         }
     }
 
-    @Cacheable(value = "cache::airQualityInfo")
     public AirQualityApi getAirQualityApi(City city) {
         return Optional.of(airQualityApiMap.get(city))
                 .orElseThrow(() -> new RuntimeException(city + "시/도 대기질 정보는 준비중입니다."));
